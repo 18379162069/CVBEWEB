@@ -38,6 +38,11 @@ public class LoginController {
 
     @GetMapping(value = "/index")
     public String index(Model model){
+        String account = "admin";
+        if (SecurityUtils.getSubject().getPrincipal() != null) {
+            account = (String) SecurityUtils.getSubject().getPrincipal();
+        }
+        model.addAttribute("account",account);
         return "index";
     }
 
